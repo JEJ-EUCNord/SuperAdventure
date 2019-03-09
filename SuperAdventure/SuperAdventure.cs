@@ -191,6 +191,8 @@ namespace SuperAdventure
 
             // Refresh player's potions combobox
             UpdatePotionListInUI();
+
+            ScrollToBottomOfMessages();
         }
 
         private void UpdateInventoryListInUI()
@@ -401,6 +403,8 @@ namespace SuperAdventure
                     MoveTo(World.LocationByID(World.LOCATION_ID_HOME));
                 }
             }
+
+            ScrollToBottomOfMessages();
         }
 
         private void btnUsePotion_Click(object sender, EventArgs e)
@@ -454,6 +458,14 @@ namespace SuperAdventure
             lblHitPoints.Text = _player.CurrentHitPoints.ToString();
             UpdateInventoryListInUI();
             UpdatePotionListInUI();
+
+            ScrollToBottomOfMessages();
+        }
+
+        private void ScrollToBottomOfMessages()
+        {
+            rtbMessages.SelectionStart = rtbMessages.Text.Length;
+            rtbMessages.ScrollToCaret();
         }
     }
 }
