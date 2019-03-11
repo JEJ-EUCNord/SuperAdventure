@@ -205,5 +205,9 @@ namespace SuperAdventure
         {
             _player.CurrentWeapon = (Weapon)cboWeapons.SelectedItem;
         }
+
+        private void btnTrade_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
