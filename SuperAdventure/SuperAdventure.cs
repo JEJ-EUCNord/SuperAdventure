@@ -216,5 +216,12 @@ namespace SuperAdventure
             tradingScreen.StartPosition = FormStartPosition.CenterParent;
             tradingScreen.ShowDialog(this);
         }
+
+        private void btnMap_Click(object sender, EventArgs e)
+        {
+            WorldMap mapScreen = new WorldMap();
+            mapScreen.StartPosition = FormStartPosition.CenterParent;
+            mapScreen.ShowDialog(this);
+        }
     }
 }
