@@ -23,19 +23,20 @@ you can use the empty sample database files
 
 The sample database is created and can be used by "Microsoft SQL Server 2016 Express LocalDB" which is part of the "Visual Studio 2017" workload ".NET desktop development".
 
-To use the sample database, simply copy and rename the two files to the directory of your .exe file. This will typically be
+To use the sample database, simply copy and rename the two files to the directory of your .exe file. This will typically be one or all of the directories
 
-    SuperAdventure/bin/Debug/SuperAdventure.mdf
-    SuperAdventure/bin/Debug/SuperAdventure.log
+    SuperAdventure/bin/Debug/
+    SuperAdventure/bin/Release/
+    SuperAdventureConsole/bin/Debug/
+    SuperAdventureConsole/bin/Release/
 
-and/or
+The two database files has to be renamed to
 
-    SuperAdventure/bin/Release/SuperAdventure.mdf
-    SuperAdventure/bin/Release/SuperAdventure.log
+    SuperAdventure.mdf
+    SuperAdventure.log
 
 Finally, the file PlayerDataMapper.cs has been changes a little bit
 - `_connectionString` is set to use the default instance "MSSQLlocalDB" of "Microsoft SQL Server 2016 Express LocalDB".
 -  The 
 [fix provided by Joe Simper](https://scottlilly.com/learn-c-by-building-a-simple-rpg-index/lesson-22-3-creating-the-sql-to-save-and-load-the-saved-game-data/#comment-4486) 
 is implemented.
-

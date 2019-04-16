@@ -66,6 +66,8 @@ namespace Engine
 
         public BindingList<PlayerQuest> Quests { get; set; }
 
+        public List<int> LocationsVisited { get; set; }
+
         private Monster CurrentMonster { get; set; }
 
         private Player(int currentHitPoints, int maximumHitPoints, int gold, int experiencePoints) : base(currentHitPoints, maximumHitPoints)
@@ -75,6 +77,7 @@ namespace Engine
 
             Inventory = new BindingList<InventoryItem>();
             Quests = new BindingList<PlayerQuest>();
+            LocationsVisited = new List<int>();
         }
 
         public static Player CreateDefaultPlayer()
@@ -108,6 +111,13 @@ namespace Engine
                 {
                     int currentWeaponID = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/CurrentWeapon").InnerText);
                     player.CurrentWeapon = (Weapon)World.ItemByID(currentWeaponID);
+                }
+
+                foreach (XmlNode node in playerData.SelectNodes("/Player/LocationsVisited/LocationVisited"))
+                {
+                    int id = Convert.ToInt32(node.Attributes["ID"].Value);
+
+                    player.LocationsVisited.Add(id);
                 }
 
                 foreach (XmlNode node in playerData.SelectNodes("/Player/InventoryItems/InventoryItem"))
@@ -161,6 +171,11 @@ namespace Engine
             // The player can enter this location
             CurrentLocation = location;
 
+            if (!LocationsVisited.Contains(CurrentLocation.ID))
+            {
+                LocationsVisited.Add(CurrentLocation.ID);
+            }
+
             CompletelyHeal();
 
             if (location.HasAQuest)
@@ -172,7 +187,7 @@ namespace Engine
                 else
                 {
                     if (PlayerHasNotCompleted(location.QuestAvailableHere) &&
-                       PlayerHasAllQuestCompletionItemsFor(location.QuestAvailableHere))
+                        PlayerHasAllQuestCompletionItemsFor(location.QuestAvailableHere))
                     {
                         GivePlayerQuestRewards(location.QuestAvailableHere);
                     }
@@ -329,6 +344,20 @@ namespace Engine
             if (CurrentWeapon != null)
             {
                 CreateNewChildXmlNode(playerData, stats, "CurrentWeapon", CurrentWeapon.ID);
+            }
+
+            // Create the "LocationsVisited" child node to hold each LocationVisited node
+            XmlNode locationsVisited = playerData.CreateElement("LocationsVisited");
+            player.AppendChild(locationsVisited);
+
+            // Create an "LocationVisited" node for each item in the player's inventory
+            foreach (int locationID in LocationsVisited)
+            {
+                XmlNode locationVisited = playerData.CreateElement("LocationVisited");
+
+                AddXmlAttributeToNode(playerData, locationVisited, "ID", locationID);
+
+                locationsVisited.AppendChild(locationVisited);
             }
 
             // Create the "InventoryItems" child node to hold each InventoryItem node
