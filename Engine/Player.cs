@@ -155,7 +155,7 @@ namespace Engine
         {
             Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints);
 
-            player.MoveTo(World.LocationByID(currentLocationID));
+            //player.MoveTo(World.LocationByID(currentLocationID));
 
             return player;
         }
