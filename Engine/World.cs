@@ -22,14 +22,7 @@ namespace Engine
         public const int ITEM_ID_SPIDER_FANG = 8;
         public const int ITEM_ID_SPIDER_SILK = 9;
         public const int ITEM_ID_ADVENTURER_PASS = 10;
-        public const int ITEM_ID_BEASTS_HORN = 11;
-        public const int ITEM_ID_KEY_OF_POWER = 12;
-        public const int ITEM_ID_KEY_OF_GREED = 13;
-        public const int ITEM_ID_KEY_OF_JEALOUSY = 14;
-        public const int ITEM_ID_KEY_OF_PAIN = 15;
-        public const int ITEM_ID_KEY_OF_LUST = 16;
-        public const int ITEM_ID_KEY_OF_GRIEF = 17;
-        public const int ITEM_ID_KEY_OF_CHAOS = 18;
+
 
         public const int MONSTER_ID_RAT = 1;
         public const int MONSTER_ID_SNAKE = 2;
@@ -37,7 +30,7 @@ namespace Engine
 
         public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
         public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
-        public const int QUEST_ID_GATHER_KEYS_OF_EMOTION = 3;
+
 
         public const int LOCATION_ID_HOME = 1;
         public const int LOCATION_ID_TOWN_SQUARE = 2;
@@ -48,57 +41,7 @@ namespace Engine
         public const int LOCATION_ID_FARM_FIELD = 7;
         public const int LOCATION_ID_BRIDGE = 8;
         public const int LOCATION_ID_SPIDER_FIELD = 9;
-        public const int LOCATION_ID_NOTHERN_WOODS = 10;
-        public const int LOCATION_ID_LIGHTS_LANDING = 11;
-        public const int LOCATION_ID_SHOP_OF_LIGHT = 12;
-        public const int LOCATION_ID_TAVERN = 13;
-        public const int LOCATION_ID_FOREST_OF_SOULS = 14;
-        public const int LOCATION_ID_THE_TICKING_FOREST = 15;
-        public const int LOCATION_ID_TICKING_HOUSE_OF_GREED = 16;
-        public const int LOCATION_ID_LIGHTS_EDGE = 17;
-        public const int LOCATION_ID_THE_MARKET_AT_THE_END_OF_LIGHT = 18;
-        public const int LOCATION_ID_LIGHT_END = 19;
-        public const int LOCATION_ID_THE_VOID = 20;
-        public const int LOCATION_ID_BEASTS_DEN = 21;
-        public const int LOCATION_ID_FOREST_OF_LIGHT_SOULS = 22;
-        public const int LOCATION_ID_BROKEN_PORTAL = 23;
-        public const int LOCATION_ID_LIGHTNERS_HAVEN = 24;
-        public const int LOCATION_ID_LIGHTNERS_MINE = 25;
-        public const int LOCATION_ID_MAGICAL_FOREST = 26;
-        public const int LOCATION_ID_HOWLING_CLIFFS = 27;
-        public const int LOCATION_ID_THE_SILENT_CLIFF = 28;
-        public const int LOCATION_ID_WIZARDS_LAIR = 29;
-        public const int LOCATION_ID_FIELD_OF_LIGHT = 30;
-        public const int LOCATION_ID_ABYSS_OF_PURE_LIGHT = 31;
-        public const int LOCATION_ID_SEA_OF_PERFECTLY_INSTILLED_LIGHT = 32;
-        public const int LOCATION_ID_GUARDS_OF_LIGHT = 33;
-        public const int LOCATION_ID_GUARDIAN_OF_LIGHT = 34;
-        public const int LOCATION_ID_GOD_OF_LIGHT = 35;
-        public const int LOCATION_ID_LUST_FOR_POWER = 36;
-        public const int LOCATION_ID_LACK_OF_MEANING = 37;
-        public const int LOCATION_ID_HOLLOW_PLACEMENTS = 38;
-        public const int LOCATION_ID_AN_EMPTY_TOMB = 39;
-        public const int LOCATION_ID_DARKNESS_INCARNATE = 40;
-        public const int LOCATION_ID_WORSHIPPERS_LAIR = 41;
-        public const int LOCATION_ID_DEATHS_BRINGER = 42;
-        public const int LOCATION_ID_A_HIDDEN_TUNNEL = 43;
-        public const int LOCATION_ID_SINNERS_PALACE = 44;
-        public const int LOCATION_ID_LACK_OF_LIGHT = 45;
-        public const int LOCATION_ID_A_SILENT_CORRIDOR = 46;
-        public const int LOCATION_ID_DARK_HEART = 47;
-        public const int LOCATION_ID_KEY_OF_GREED = 48;
-        public const int LOCATION_ID_KEY_OF_JEALOUSY = 49;
-        public const int LOCATION_ID_KEY_OF_POWER = 50;
-        public const int LOCATION_ID_GREEDS_SEED = 51;
-        public const int LOCATION_ID_SINFUL_GRAVEYARD = 52;
-        public const int LOCATION_ID_KEY_OF_LUST = 53;
-        public const int LOCATION_ID_KEY_OF_GRIEF = 54;
-        public const int LOCATION_ID_KEY_OF_PAIN = 55;
-        public const int LOCATION_ID_THE_CALM_BEFORE_THE_STORM = 56;
-        public const int LOCATION_ID_SHRIEKING_SILENCE = 57;
-        public const int LOCATION_ID_COMPLETE_AND_UTTER_SILENCE = 58;
-        public const int LOCATION_ID_DARK = 59;
-        public const int LOCATION_ID_DARKER = 60;
+
         static World()
         {
             PopulateItems();
@@ -158,25 +101,14 @@ namespace Engine
                     "Clear the farmer's field",
                     "Kill snakes in the farmer's field and bring back 3 snake fangs. You will receive an adventurer's pass and 20 gold pieces.", 20, 20);
 
-            Quest gatherKeysOfEmotion =
-               new Quest(QUEST_ID_GATHER_KEYS_OF_EMOTION, "Gather the keys of emotion", "You must gather all the keys, and then you'll gain the Key of Chaos. I'll throw in 20 gold pieces as well.", 20, 20);
-
-
-            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_GREED), 1));
-            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_JEALOUSY), 1));
-            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_POWER), 1));
-            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_LUST), 1));
-            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_GRIEF), 1));
-            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_PAIN), 1));
-
+          
             clearFarmersField.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_SNAKE_FANG), 3));
 
-            gatherKeysOfEmotion.RewardItem = ItemByID(ITEM_ID_KEY_OF_CHAOS);
+           
             clearFarmersField.RewardItem = ItemByID(ITEM_ID_ADVENTURER_PASS);
 
             _quests.Add(clearAlchemistGarden);
             _quests.Add(clearFarmersField);
-            _quests.Add(gatherKeysOfEmotion);
 
         }
 
@@ -212,28 +144,7 @@ namespace Engine
             Location spiderField = new Location(LOCATION_ID_SPIDER_FIELD, "Forest", "You see spider webs covering covering the trees in this forest.");
             spiderField.AddMonster(MONSTER_ID_GIANT_SPIDER, 100);
            
-            Location nothernWoods = new Location(LOCATION_ID_NOTHERN_WOODS, "Nothern woods", "You see a portal. Will you  jump in? (THERE'S NO GOING BACK)");
-
-            Location lightsLanding = new Location(LOCATION_ID_LIGHTS_LANDING, "Lights Landing", "You woke up seeing nothing but light. What happpened?");
-
-            Location shopOfLight = new Location(LOCATION_ID_SHOP_OF_LIGHT, "A magical shop", "A lot of weapons for sale... Also a spider eye.");
-
-            Location tavern = new Location(LOCATION_ID_TAVERN, "CT's tavern", "You might do better in combat when drunk");
-
-            Location forestOfSouls = new Location(LOCATION_ID_FOREST_OF_SOULS, "Forest of souls", "A forest full of souls. Huh.");
-
-            Location forestOfLightSouls = new Location(LOCATION_ID_FOREST_OF_LIGHT_SOULS, "Forest of light souls", "More like dark souls amirite?");
-
-            Location tickingForest = new Location(LOCATION_ID_THE_TICKING_FOREST, "Ticking forest", "Are the trees... ticking?");
-
-            Location lightsEdge = new Location(LOCATION_ID_LIGHTS_EDGE, "Light's Edge", "A town located at the edge of Light's kingdom");
-
-            Location lightsEnd = new Location(LOCATION_ID_LIGHT_END, "Light's End", "Darkness on one side, light on another. You feel at peace, for just a single moment");
-
-            Location theVoid = new Location(LOCATION_ID_THE_VOID, "The Void", "The Positive emotions slowly leave your body", ItemByID(ITEM_ID_BEASTS_HORN));
-
-            Location theCalmBeforeTheStorm = new Location(LOCATION_ID_THE_CALM_BEFORE_THE_STORM, "The calm before the storm", "Fear grows within you.", ItemByID(ITEM_ID_KEY_OF_CHAOS));
-
+        
             // Link the locations together
             home.LocationToNorth = townSquare;
 
