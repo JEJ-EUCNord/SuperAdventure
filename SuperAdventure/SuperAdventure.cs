@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 using System.IO;
+
 using Engine;
 
 namespace SuperAdventure
@@ -110,15 +111,7 @@ namespace SuperAdventure
         {
             if (propertyChangedEventArgs.PropertyName == "Weapons")
             {
-                Weapon previouslySelectedWeapon = _player.CurrentWeapon;
-
                 cboWeapons.DataSource = _player.Weapons;
-
-                if (previouslySelectedWeapon != null &&
-                    _player.Weapons.Exists(w => w.ID == previouslySelectedWeapon.ID))
-                {
-                    cboWeapons.SelectedItem = previouslySelectedWeapon;
-                }
 
                 if (!_player.Weapons.Any())
                 {
