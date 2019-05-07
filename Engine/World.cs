@@ -22,6 +22,14 @@ namespace Engine
         public const int ITEM_ID_SPIDER_FANG = 8;
         public const int ITEM_ID_SPIDER_SILK = 9;
         public const int ITEM_ID_ADVENTURER_PASS = 10;
+        public const int ITEM_ID_BEASTS_HORN = 11;
+        public const int ITEM_ID_KEY_OF_POWER = 12;
+        public const int ITEM_ID_KEY_OF_GREED = 13;
+        public const int ITEM_ID_KEY_OF_JEALOUSY = 14;
+        public const int ITEM_ID_KEY_OF_PAIN = 15;
+        public const int ITEM_ID_KEY_OF_LUST = 16;
+        public const int ITEM_ID_KEY_OF_GRIEF = 17;
+        public const int ITEM_ID_KEY_OF_CHAOS = 18;
 
         public const int MONSTER_ID_RAT = 1;
         public const int MONSTER_ID_SNAKE = 2;
@@ -29,6 +37,7 @@ namespace Engine
 
         public const int QUEST_ID_CLEAR_ALCHEMIST_GARDEN = 1;
         public const int QUEST_ID_CLEAR_FARMERS_FIELD = 2;
+        public const int QUEST_ID_GATHER_KEYS_OF_EMOTION = 3;
 
         public const int LOCATION_ID_HOME = 1;
         public const int LOCATION_ID_TOWN_SQUARE = 2;
@@ -149,12 +158,26 @@ namespace Engine
                     "Clear the farmer's field",
                     "Kill snakes in the farmer's field and bring back 3 snake fangs. You will receive an adventurer's pass and 20 gold pieces.", 20, 20);
 
+            Quest gatherKeysOfEmotion =
+               new Quest(QUEST_ID_GATHER_KEYS_OF_EMOTION, "Gather the keys of emotion", "You must gather all the keys, and then you'll gain the Key of Chaos. I'll throw in 20 gold pieces as well.", 20, 20);
+
+
+            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_GREED), 1));
+            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_JEALOUSY), 1));
+            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_POWER), 1));
+            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_LUST), 1));
+            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_GRIEF), 1));
+            gatherKeysOfEmotion.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_KEY_OF_PAIN), 1));
+
             clearFarmersField.QuestCompletionItems.Add(new QuestCompletionItem(ItemByID(ITEM_ID_SNAKE_FANG), 3));
 
+            gatherKeysOfEmotion.RewardItem = ItemByID(ITEM_ID_KEY_OF_CHAOS);
             clearFarmersField.RewardItem = ItemByID(ITEM_ID_ADVENTURER_PASS);
 
             _quests.Add(clearAlchemistGarden);
             _quests.Add(clearFarmersField);
+            _quests.Add(gatherKeysOfEmotion);
+
         }
 
         private static void PopulateLocations()
@@ -188,6 +211,28 @@ namespace Engine
 
             Location spiderField = new Location(LOCATION_ID_SPIDER_FIELD, "Forest", "You see spider webs covering covering the trees in this forest.");
             spiderField.AddMonster(MONSTER_ID_GIANT_SPIDER, 100);
+           
+            Location nothernWoods = new Location(LOCATION_ID_NOTHERN_WOODS, "Nothern woods", "You see a portal. Will you  jump in? (THERE'S NO GOING BACK)");
+
+            Location lightsLanding = new Location(LOCATION_ID_LIGHTS_LANDING, "Lights Landing", "You woke up seeing nothing but light. What happpened?");
+
+            Location shopOfLight = new Location(LOCATION_ID_SHOP_OF_LIGHT, "A magical shop", "A lot of weapons for sale... Also a spider eye.");
+
+            Location tavern = new Location(LOCATION_ID_TAVERN, "CT's tavern", "You might do better in combat when drunk");
+
+            Location forestOfSouls = new Location(LOCATION_ID_FOREST_OF_SOULS, "Forest of souls", "A forest full of souls. Huh.");
+
+            Location forestOfLightSouls = new Location(LOCATION_ID_FOREST_OF_LIGHT_SOULS, "Forest of light souls", "More like dark souls amirite?");
+
+            Location tickingForest = new Location(LOCATION_ID_THE_TICKING_FOREST, "Ticking forest", "Are the trees... ticking?");
+
+            Location lightsEdge = new Location(LOCATION_ID_LIGHTS_EDGE, "Light's Edge", "A town located at the edge of Light's kingdom");
+
+            Location lightsEnd = new Location(LOCATION_ID_LIGHT_END, "Light's End", "Darkness on one side, light on another. You feel at peace, for just a single moment");
+
+            Location theVoid = new Location(LOCATION_ID_THE_VOID, "The Void", "The Positive emotions slowly leave your body", ItemByID(ITEM_ID_BEASTS_HORN));
+
+            Location theCalmBeforeTheStorm = new Location(LOCATION_ID_THE_CALM_BEFORE_THE_STORM, "The calm before the storm", "Fear grows within you.", ItemByID(ITEM_ID_KEY_OF_CHAOS));
 
             // Link the locations together
             home.LocationToNorth = townSquare;
