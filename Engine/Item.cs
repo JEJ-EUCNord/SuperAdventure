@@ -7,7 +7,7 @@
         public string NamePlural { get; set; }
         public int Price { get; set; }
 
-        public Item(int id, string name, string namePlural, int price)
+        public Item(int id, string name, string namePlural, int price) 
         {
             ID = id;
             Name = name;

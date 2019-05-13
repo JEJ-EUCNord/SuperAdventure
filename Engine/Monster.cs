@@ -17,8 +17,8 @@ namespace Engine
         // The items this instance of the monster has in their inventory
         internal List<InventoryItem> LootItems { get; }
 
-        public Monster(int id, string name, int maximumDamage, int rewardExperiencePoints, int rewardGold, int currentHitPoints, int maximumHitPoints) 
-            : base(currentHitPoints, maximumHitPoints)
+        public Monster(int id, string name, int maximumDamage, int rewardExperiencePoints, int rewardGold, int currentHitPoints, int maximumHitPoints, int strength, int intellect, int agility, int defense, int criticalStrike) 
+            : base(currentHitPoints, maximumHitPoints, strength,  intellect,  agility,  defense,  criticalStrike)
         {
             ID = id;
             Name = name;
@@ -34,7 +34,7 @@ namespace Engine
         internal Monster NewInstanceOfMonster()
         {
             Monster newMonster =
-                new Monster(ID, Name, MaximumDamage, RewardExperiencePoints, RewardGold, CurrentHitPoints, MaximumHitPoints);
+                new Monster(ID, Name, MaximumDamage, RewardExperiencePoints, RewardGold, CurrentHitPoints, MaximumHitPoints, Strength,Intellect,Agility,Defense,CriticalStrike);
 
             // Add items to the lootedItems list, comparing a random number to the drop percentage
             foreach (LootItem lootItem in LootTable.Where(lootItem => RandomNumberGenerator.NumberBetween(1, 100) <= lootItem.DropPercentage))
