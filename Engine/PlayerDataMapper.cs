@@ -53,11 +53,16 @@ namespace Engine
                         int maximumHitPoints = (int)reader["MaximumHitPoints"];
                         int gold = (int)reader["Gold"];
                         int experiencePoints = (int)reader["ExperiencePoints"];
+                        int strength = (int)reader["strength"];
+                        int intellect = (int)reader["intellect"];
+                        int agility = (int)reader["agility"];
+                        int defense = (int)reader["defense"];
+                        int criticalStrike = (int)reader["criticalStrike"];
+
                         currentLocationID = (int)reader["CurrentLocationID"];
 
                         // Create the Player object, with the saved game values
-                        player = Player.CreatePlayerFromDatabase(currentHitPoints, maximumHitPoints, gold,
-                            experiencePoints, currentLocationID);
+                        player = Player.CreatePlayerFromDatabase(currentHitPoints, maximumHitPoints, gold, experiencePoints,strength,intellect,agility,defense,criticalStrike, currentLocationID);
 
                         // Close the reader
                         reader.Close();

@@ -70,7 +70,7 @@ namespace Engine
 
         private Monster CurrentMonster { get; set; }
 
-        private Player(int currentHitPoints, int maximumHitPoints, int gold, int experiencePoints) : base(currentHitPoints, maximumHitPoints)
+        private Player(int currentHitPoints, int maximumHitPoints, int gold, int experiencePoints, int strength, int intellect, int agility, int defense, int criticalStrike) : base(currentHitPoints, maximumHitPoints, strength, intellect, agility, defense, criticalStrike)
         {
             Gold = gold;
             ExperiencePoints = experiencePoints;
@@ -82,7 +82,7 @@ namespace Engine
 
         public static Player CreateDefaultPlayer()
         {
-            Player player = new Player(10, 10, 20, 0);
+            Player player = new Player(10, 10, 20, 0,1,1,1,1,0);
             player.Inventory.Add(new InventoryItem(World.ItemByID(World.ITEM_ID_RUSTY_SWORD), 1));
             player.CurrentLocation = World.LocationByID(World.LOCATION_ID_HOME);
 
@@ -101,8 +101,13 @@ namespace Engine
                 int maximumHitPoints = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/MaximumHitPoints").InnerText);
                 int gold = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/Gold").InnerText);
                 int experiencePoints = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/ExperiencePoints").InnerText);
+                int strength = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/Strengt").InnerText);
+                int intellect = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/intellect").InnerText);
+                int agility = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/agility").InnerText);
+                int defense = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/defense").InnerText);
+                int criticalStrike = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/criticalStrike").InnerText);
 
-                Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints);
+                Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints,strength,intellect,agility,defense,criticalStrike);
 
                 int currentLocationID = Convert.ToInt32(playerData.SelectSingleNode("/Player/Stats/CurrentLocation").InnerText);
                 player.CurrentLocation = World.LocationByID(currentLocationID);
@@ -151,9 +156,9 @@ namespace Engine
             }
         }
 
-        public static Player CreatePlayerFromDatabase(int currentHitPoints, int maximumHitPoints, int gold, int experiencePoints, int currentLocationID)
+        public static Player CreatePlayerFromDatabase(int currentHitPoints, int maximumHitPoints, int gold, int experiencePoints, int strength, int  intellect, int  agility, int defense, int criticalStrike, int currentLocationID)
         {
-            Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints);
+            Player player = new Player(currentHitPoints, maximumHitPoints, gold, experiencePoints, strength, intellect, agility, defense, criticalStrike);
 
             //player.MoveTo(World.LocationByID(currentLocationID));
 
@@ -231,7 +236,38 @@ namespace Engine
 
         public void UseWeapon(Weapon weapon)
         {
-            int damage = RandomNumberGenerator.NumberBetween(weapon.MinimumDamage, weapon.MaximumDamage);
+            
+            int PlayerAgility = Agility + weapon.AgilityWeapon;
+            int PlayerStrengt = Strength + weapon.StrengthWeapon;
+            int PlayerIntellect = Intellect + weapon.IntellectWeapon;
+            int WeaponPreferedStat = 0;
+            int damage = 0;
+            int StatCrit = weapon.CriticalStrikeWeapon + CriticalStrike;
+            int crit = RandomNumberGenerator.NumberBetween(StatCrit, 50);
+
+
+
+            if (weapon.WeaponType == "Agility")
+            {
+                WeaponPreferedStat = PlayerAgility;
+            }
+            if(weapon.WeaponType == "Strenght")
+            {
+                WeaponPreferedStat = PlayerStrengt;
+            }
+            if(weapon.WeaponType == "Intellect")
+            {
+                WeaponPreferedStat = PlayerIntellect;
+            }
+            if(crit > 25)
+            {
+                damage = RandomNumberGenerator.NumberBetween(weapon.MinimumDamage + WeaponPreferedStat, weapon.MaximumDamage + WeaponPreferedStat)+ RandomNumberGenerator.NumberBetween(weapon.MinimumDamage + WeaponPreferedStat, weapon.MaximumDamage + WeaponPreferedStat); 
+            }
+            else
+            {
+                damage = RandomNumberGenerator.NumberBetween(weapon.MinimumDamage + WeaponPreferedStat, weapon.MaximumDamage+WeaponPreferedStat);
+            }
+            
 
             if (damage == 0)
             {
@@ -240,7 +276,15 @@ namespace Engine
             else
             {
                 CurrentMonster.CurrentHitPoints -= damage;
-                RaiseMessage("You hit the " + CurrentMonster.Name + " for " + damage + " points.");
+                if (crit > 25)
+                {
+                    RaiseMessage("You criticalhit the " + CurrentMonster.Name + " for " + damage + " points.");
+                }
+                else
+                {
+                    RaiseMessage("You hit the " + CurrentMonster.Name + " for " + damage + " points.");
+                }
+                
             }
 
             if (CurrentMonster.IsDead)

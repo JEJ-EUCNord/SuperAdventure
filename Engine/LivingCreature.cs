@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    public class LivingCreature : INotifyPropertyChanged
+    public class LivingCreature : Stats, INotifyPropertyChanged
     {
         private int _currentHitPoints;
 
@@ -20,7 +20,8 @@ namespace Engine
 
         public bool IsDead { get { return CurrentHitPoints <= 0; } }
 
-        public LivingCreature(int currentHitPoints, int maximumHitPoints)
+
+        public LivingCreature(int maximumHitPoints, int currentHitPoints, int strength,int intellect, int agility, int defense, int criticalStrike) : base(strength, intellect, agility, defense, criticalStrike)
         {
             CurrentHitPoints = currentHitPoints;
             MaximumHitPoints = maximumHitPoints;
