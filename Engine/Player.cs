@@ -267,8 +267,8 @@ namespace Engine
             {
                 damage = RandomNumberGenerator.NumberBetween(weapon.MinimumDamage + WeaponPreferedStat, weapon.MaximumDamage+WeaponPreferedStat);
             }
-            
 
+            
             if (damage == 0)
             {
                 RaiseMessage("You missed the " + CurrentMonster.Name);
@@ -556,9 +556,21 @@ namespace Engine
 
         private void LetTheMonsterAttack()
         {
-            int damageToPlayer = RandomNumberGenerator.NumberBetween(0, CurrentMonster.MaximumDamage);
+            int crit = 0;
+            int damageToPlayer = 0;
+            crit = RandomNumberGenerator.NumberBetween(CurrentMonster.CriticalStrike, 50);
+            if (crit > 25)
+            {
+                damageToPlayer = RandomNumberGenerator.NumberBetween(0, CurrentMonster.MaximumDamage)+ RandomNumberGenerator.NumberBetween(0, CurrentMonster.MaximumDamage);
+                RaiseMessage("The " + CurrentMonster.Name + " Criticalhit " + damageToPlayer + " points of damage.");
+            }
+            else
+            {
+            damageToPlayer = RandomNumberGenerator.NumberBetween(0, CurrentMonster.MaximumDamage);
 
             RaiseMessage("The " + CurrentMonster.Name + " did " + damageToPlayer + " points of damage.");
+            }
+            
 
             CurrentHitPoints -= damageToPlayer;
 
